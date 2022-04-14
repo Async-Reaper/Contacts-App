@@ -1,0 +1,55 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "nameUser": "Aleksei123",
+      "password": "Ikd12213443"
+    },
+    {
+      "id": 2,
+      "nameUser": "Mog",
+      "password": "Ikd12213443"
+    },
+    {
+      "nameUser": "Blop",
+      "password": "3241",
+      "id": 3
+    },
+    {
+      "nameUser": "dsfgdsg",
+      "password": "dsfggs",
+      "id": 4
+    },
+    {
+      "nameUser": "sfdhigosi",
+      "password": "sosi",
+      "id": 5
+    }
+  ],
+  "contacts": [
+    {
+      "id": 3,
+      "userId": 2,
+      "nameContact": "Father",
+      "number": "+45412"
+    },
+    {
+      "id": 4,
+      "userId": 2,
+      "nameContact": "Sister",
+      "number": "+09324"
+    },
+    {
+      "userId": "1",
+      "name": "dfhfh",
+      "number": "+6541",
+      "id": 11
+    },
+    {
+      "userId": "1",
+      "name": "pizda",
+      "number": "+564",
+      "id": 13
+    }
+  ]
+}
