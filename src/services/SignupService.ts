@@ -1,9 +1,9 @@
 import { IUserLogin } from '../models/IUserLogin';
 import { AppDispatch } from '../store/store';
 import { urlDomain } from '../constants/urlDomain';
-import axios from 'axios';
 import { registrationError, registrationFetch, registrationSuccess } from '../store/reducers/registrationReducer';
 import { setStatusPopup } from '../store/reducers/popunReducer';
+import axios from 'axios';
 
 export const signup = (data: IUserLogin) => {
     return async (dispatch: AppDispatch) => {
