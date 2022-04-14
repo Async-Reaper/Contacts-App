@@ -3,6 +3,7 @@ import { IUserLogin } from '../models/IUserLogin';
 import { loginFetch, loginFetchingError, loginFetchingSuccess } from '../store/reducers/loginReducer';
 import { AppDispatch } from '../store/store';
 import { urlDomain } from '../constants/urlDomain';
+import { contactError } from '../store/reducers/contactsReducer';
 
 export const login = (data: IUserLogin) => {
     return async (dispatch: AppDispatch) => {
@@ -16,6 +17,7 @@ export const login = (data: IUserLogin) => {
                     dispatch(loginFetchingSuccess(user))
                 } else {
                     dispatch(loginFetchingError('User or password incorrect.'))
+                    dispatch(contactError('Username or password incorected.'))
                 }
             })
         } catch (error) {

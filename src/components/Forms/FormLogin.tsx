@@ -1,15 +1,15 @@
 import { Button, TextField } from '@mui/material';
 import React, { FC } from 'react';
 import { useTypedDispatch } from '../../hooks/useTypedDispatch';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { IUserLogin } from '../../models/IUserLogin';
 import { login } from '../../services/LoginService';
+import { contactError } from '../../store/reducers/contactsReducer';
 import { inputChange } from '../../store/reducers/inputReducer';
 import { setLoginData } from '../../store/reducers/loginReducer';
+import Error from '../UI/ErrorText/Error';
 import Form from '../UI/Forms/Form';
 
 const FormsLogin: FC = () => {
-    const {user} = useTypedSelector(state => state.login)
     const dispatch = useTypedDispatch()
 
     const loginData: IUserLogin = {
@@ -17,15 +17,20 @@ const FormsLogin: FC = () => {
         password: ''
     }
 
-    const postData = (e: React.MouseEvent<HTMLFormElement>) => {
+    const postData = (e: React.MouseEvent<HTMLFormElement>, userData: IUserLogin) => {
         e.preventDefault()
-        dispatch(setLoginData(loginData))
-        dispatch(login(loginData))
+        if (userData.nameUser !== '' && userData.password !== '') {
+            dispatch(setLoginData(userData))
+            dispatch(login(userData))
+        } else {
+            dispatch(contactError('Inputs must be filled!'))
+            
+        }
     }
     
     return (
         <div>
-            <Form method='POST' onSubmit={(e) => postData(e)}>
+            <Form method='POST' onSubmit={(e) => postData(e, loginData)}>
                 <TextField 
                     id="standard-basic-login" 
                     label="Username" 
@@ -50,6 +55,7 @@ const FormsLogin: FC = () => {
                     type='password'
                 />
                 <Button type='submit' variant="contained">Login</Button>
+                <Error />
             </Form>
         </div>
     )
