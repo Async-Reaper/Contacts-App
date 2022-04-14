@@ -5,6 +5,7 @@ import { useTypedDispatch } from '../../hooks/useTypedDispatch'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { IUserLogin } from '../../models/IUserLogin'
 import { signup } from '../../services/SignupService'
+import { contactError } from '../../store/reducers/contactsReducer'
 import { inputChange } from '../../store/reducers/inputReducer'
 import Form from '../UI/Forms/Form'
 
@@ -18,14 +19,19 @@ const FormSignup = () => {
   }
 
 
-  const handleReg = (e: React.MouseEvent<HTMLFormElement>) => {
+  const handleReg = (e: React.MouseEvent<HTMLFormElement>, signupData: IUserLogin) => {
     e.preventDefault();
-    dispatch(signup(newUser))
-    navigate('/login')
+
+    if (signupData.nameUser !== '' && signupData.password !== '') {
+      dispatch(signup(signupData))
+      navigate('/login')
+    } else {
+      dispatch(contactError('Inputs must be filled!'))
+    }
   }
 
   return (
-    <Form method='POST' onSubmit={e => handleReg(e)}>
+    <Form method='POST' onSubmit={e => handleReg(e, newUser)}>
       <TextField 
           id="standard-basic-login" 
           label="Username" 
