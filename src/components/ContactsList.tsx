@@ -6,6 +6,7 @@ import { IContacts } from '../models/IContact'
 import { requests } from '../services/PostService'
 import ContactsItem from './ContactsItem'
 import ModalWindowEdit from './ModalWindows/ModalWindowEdit'
+import Loader from './UI/Loader/Loader'
 import Search from './UI/Search/Search'
 
 const ContactsWrapper = styled('div')({
@@ -14,7 +15,7 @@ const ContactsWrapper = styled('div')({
 
 const ContactsList: FC = () => {
   
-  const { data: contacts } = requests.useGetAllContactQuery(JSON.parse(localStorage.getItem('userId') || ''))
+  const { data: contacts, isLoading } = requests.useGetAllContactQuery(JSON.parse(localStorage.getItem('userId') || ''))
   const { search } = useTypedSelector(state => state.contacts)
   const sorted: IContacts[] = useSearch(contacts!, search)
     console.log(sorted)
@@ -22,6 +23,9 @@ const ContactsList: FC = () => {
     <ContactsWrapper>
       <ModalWindowEdit />
       <Search />
+        {
+          isLoading && <Loader />
+        }
         {
           contacts && sorted.map(contact => 
               <ContactsItem key={contact.id} contact={contact} name={contact.name} number={contact.number} />)
