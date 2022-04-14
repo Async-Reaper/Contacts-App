@@ -18,7 +18,6 @@ const ContactsList: FC = () => {
   const { data: contacts, isLoading } = requests.useGetAllContactQuery(JSON.parse(localStorage.getItem('userId') || ''))
   const { search } = useTypedSelector(state => state.contacts)
   const sorted: IContacts[] = useSearch(contacts!, search)
-    console.log(sorted)
   return (
     <ContactsWrapper>
       <ModalWindowEdit />
